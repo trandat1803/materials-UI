@@ -23,8 +23,8 @@ const style = {
 };
 
 function LoginForm({ callback }) {
-  const [username] = useState("trancaodua");
-  const [password] = useState("123");
+  const [username] = useState("");
+  //const [password] = useState("");
 
   const auth = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
