@@ -1,36 +1,53 @@
-import React from "react";
-import Typography from '@mui/material/Typography';
-import { Box, Link } from '@mui/material';
-import SearchAppBar from "./components/SearchAppBar";
-import OutlinedCard from "./components/OutlinedCard";
-import jobs from "./jobs.json";
+import "./App.css";
+import { Routes, Route, useLocation } from "react-router-dom";
+import Layout from "./pages/Layout";
+import Home from "./pages/Home";
+import JobDetail from "./pages/JobDetail";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://www.coderschool.vn">
-        CoderSchool
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import RequireAuth from "./auth/RequireAuth";
+import Login from "./pages/Login";
+import LoginModal from "./components/LoginModal";
+import JobDetailModal from "./components/JobDetailModal";
+import { useContext } from "react";
+import AuthContext from "./auth/AuthContext";
 
 function App() {
+  const location = useLocation();
+  const auth = useContext(AuthContext);
+  const state = location.state;
+
   return (
     <>
-    <SearchAppBar/>
-    {jobs.slice(0, 4).map(job => (
-      <OutlinedCard book={job}/>
-    ))}
-      <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom align="center">
-          My new React app
-        </Typography>
-        <Copyright />
-      </Box>
+      <Routes
+        location={
+          location.state?.backgroundLocation
+            ? location.state.backgroundLocation
+            : location
+        }
+      >
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          {/* <Route path="job/:id" element={<JobDetail />} /> */}
+          <Route path="login" element={<Login />} />
+        </Route>
+        <Route
+          path="*"
+          element={
+            <main>
+              <p>There's nothing here!</p>
+            </main>
+          }
+        />
+      </Routes>
+      {state && auth.user ? (
+        <Routes>
+          <Route path="/job/:id" element={<JobDetailModal />}></Route>
+        </Routes>
+      ) : (
+        <Routes>
+          <Route path="/job/:id" element={<LoginModal />}></Route>
+        </Routes>
+      )}
     </>
   );
 }
