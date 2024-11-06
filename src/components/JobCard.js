@@ -1,15 +1,15 @@
-//import React, { useContext } from "react";
-//import Box from "@mui/material/Box";
+import React, { useState, useContext } from "react";
+import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-//import CardActions from "@mui/material/CardActions";
+import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-//import Chip from "@mui/material/Chip";
+import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
-//import AuthContext from "../auth/AuthContext";
-import {useLocation, Link } from "react-router-dom";
+import AuthContext from "../auth/AuthContext";
+import {useNavigate, useLocation, Link } from "react-router-dom";
 import SkillsPaper from "./SkillsPaper";
 import { styled } from "@mui/material/styles";
 
@@ -25,16 +25,16 @@ const CardStyle = styled(Card)(({ theme }) => ({
 }));
 
 function JobCard({ description, skills, id, title }) {
-  //const auth = useContext(AuthContext);
-  //const navigate = useNavigate();
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
   let location = useLocation();
-  /*const handleClick = (event) => {
+  const handleClick = (event) => {
     if (auth.user) {
       navigate(`/job/${id}`);
     } else {
       navigate("/login");
     }
-  };*/
+  };
   return (
     <CardStyle ariant="outlined">
       <Stack

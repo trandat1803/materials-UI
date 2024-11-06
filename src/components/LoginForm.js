@@ -23,8 +23,8 @@ const style = {
 };
 
 function LoginForm({ callback }) {
-  const [username] = useState("");
-  //const [password] = useState("");
+  const [username] = useState("trandat");
+  const [password] = useState("12345");
 
   const auth = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
@@ -45,7 +45,7 @@ function LoginForm({ callback }) {
         disabled
         label="Username"
         default="user"
-        value={""}
+        value={username}
         sx={{ m: 1 }}
       />
       <FormControl sx={{ m: 1 }} variant="outlined">
@@ -54,7 +54,7 @@ function LoginForm({ callback }) {
           disabled
           id="outlined-adornment-password"
           type={showPassword ? "text" : "password"}
-          value={""}
+          value={password}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
